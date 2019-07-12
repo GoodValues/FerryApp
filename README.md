@@ -61,10 +61,11 @@ Ekran główny powinien mieć możliwość przywrócenia dowolnej sesji zapisane
 Powinniśmy mieć możliwość zakończenia obecnej sesji, co powoduje zapisanie do pliku i wyczyszczenie wszystkich danych w pamięci aplikacji związanych z nią.
 #### Testy jednostkowe
 Powinniśmy napisać testy jednostkowe pokrywające wszystkie klasy serwisowe, a więc wszystkie metody przeliczeniowo-pomocnicze.
-#### Zadania dodatkowe z *
-- Dodajmy obsługę przewozu towaru, na podstawie i ciężaru i objętości.
-- Dodajmy możliwość wyszukiwania osób po imieniu i nazwisku we wszystkich rejsach, tak więc osoba musi dostać kontekst nazwy, a stan musi wzbogacić się o jego przechowywanie.
-- Dodajmy łączenie pojazdu z właścicielem który też płynie danym promem.
+#### Zadania dodatkowe
+- Dodajmy obsługę przewozu towaru, wyliczanie ceny na podstawie i ciężaru i objętości - 50 zł za m3.
+- Dodajmy możliwość wyszukiwania osób po imieniu i nazwisku we wszystkich rejsach, tak więc osoba musi dostać kontekst nazwy, a stan musi wzbogacić się o jego przechowywanie. Wszytko to musi być zapisane podczas kończenia poszczególnych sesji.
+- Dodajmy łączenie pojazdu z właścicielem który też płynie danym promem, i ograniczenie unimożliwiające dodanie auta bez właściciela.
+- Niech każdy rejs będzie powiązany z promem. Promy mają jednostki miejsca. Każdy prom może przewieźć 1000 jednostek, człowiek zabiera 5/10 jednostek, pojazdy 15/30/50 a towar 5 za m3, wprowadźmy możliwość sprawdzenia ile promowi zostało miejsca, oraz walidację przy sprzedaży kolejnego biletu, czy na promie będzie miejsce biorąc pod uwagę dotychczasowe sprzedane bilety.  
 ### Pomoce
 
 ####Wzorce projektowe do wykorzystania:

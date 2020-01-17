@@ -28,7 +28,7 @@ Podczas samego zadania, klient wymaga od nas aby kod był jak najwyższej jakoś
 Zadanie to polega na przygotowaniu podstawowego interfejsu na kontakt z użytkownikiem, na tym etapie projektowania aplikacji, wystarczający będzie kontakt za pomocą konsoli. `System.out` drukuje pytania w konsoli, natomiast `new Scanner(System.in)` przyjmuje odpowiedzi. Do wykonania będzie:
 - Uzyskanie informacji o rodzaju biletu, osoba czy pojazd, po wyborze, przeniesienie do odpowiedniego ekranu po czym  danie możliwości powrotu do poprzedniego ekranu.
 ######Podpowiedź: Można wykorzystać wzorzec projektowy strategia i fabryka abstrakcyjna.
-#### Napisanie obsługi sprzedaży bilety dla osoby
+#### Napisanie obsługi sprzedaży biletu dla osoby
 W ekranie osoby, musimy poprosić o wiek, w zależności od niego dostosować cenę biletu, wyświetlić ją na ekranie i dać możliwość powrotu do ekranu głównego. 
 
 **Stawki**:
@@ -59,15 +59,33 @@ Ekran główny powinien posiadać opcję zapisu całego obecnego stanu aplikacji
 Ekran główny powinien mieć możliwość przywrócenia dowolnej sesji zapisanej w pliku, po wyborze opcji powinny wyświetlić nam się dostępne pliki zapisu. Po wyborze dowolnego z nich, zapisana sesja powinna być przywrócona, i wszystkie możliwe opcje dotyczące sesji powinny być aktywne (sprawdzenie stanu/dodanie blietu itp.).
 #### Zakończenie sesji
 Powinniśmy mieć możliwość zakończenia obecnej sesji, co powoduje zapisanie do pliku i wyczyszczenie wszystkich danych w pamięci aplikacji związanych z nią.
+#### Przewóz towaru
+Dodajmy obsługę przewozu towaru, wyliczanie ceny na podstawie objętości - 50 zł za m3.
+#### Wyszukanie osób
+Dodajmy możliwość wyszukiwania osób po imieniu i nazwisku we wszystkich rejsach, tak więc osoba musi dostać kontekst nazwy, a stan musi wzbogacić się o jego przechowywanie. Wszytko to musi być zapisane podczas kończenia poszczególnych sesji.
+#### Połączenie pojazdu z właścicielem
+Dodajmy łączenie pojazdu z właścicielem który też płynie danym promem, i ograniczenie unimożliwiające dodanie auta bez właściciela.
+#### Promy
+Niech każdy rejs będzie powiązany z promem. Promy mają jednostki miejsca. Każdy prom może przewieźć 1000 jednostek, człowiek zabiera 5/10 jednostek, pojazdy 15/30/50 a towar 5 za m3, wprowadźmy możliwość sprawdzenia ile promowi zostało miejsca, oraz walidację przy sprzedaży kolejnego biletu, czy na promie będzie miejsce biorąc pod uwagę dotychczasowe sprzedane bilety.  
+#### Dodanie zniżek za pakiety
+Nasz biznes stwierdził że musimy wprowadzić promocje. Dodajcie zniżki, zależne od konfiguracji bilietów. Niech całkowity koszt sesji przelicza się ponownie podczas wykrycia istnienia określonej konfiguracji.
+**Możliwe konfiguracje**:
+- Osoba dorosła i dziecko do 18 roku życia - 20% zniżki na oba bilety
+- 2 samochody - 10% zniżki na oba bilety
+- 2 dorosłych i dowolna ilość dzieci do 18 roku życia - 15% zniżki na wszystkie bilety
+- Samochód i min. 3 osoby - 20% zniżki na auto i 10% zniżki na każdą osobę
+- Min. 5 osób - 10% zniżki na każdą osobę
+- Min. 7 osób - 15% zniżki na każdą osobę
+- Za każde 3 samochody powyżej 2 do maksymalnej ilości 26 aut - += 5% (2 samochody to 10%, 5 samochodów to 15% a 8 samochodów to 20%)
+######Podpowiedź: Można wykorzystać wzorzec projektowy strategy lub decorator. Tutaj baaardzo przydałyby się testy jednostkowe.
 #### Testy jednostkowe
 Powinniśmy napisać testy jednostkowe pokrywające wszystkie klasy serwisowe, a więc wszystkie metody przeliczeniowo-pomocnicze.
-#### Zadania dodatkowe
-- Dodajmy obsługę przewozu towaru, wyliczanie ceny na podstawie i ciężaru i objętości - 50 zł za m3.
-- Dodajmy możliwość wyszukiwania osób po imieniu i nazwisku we wszystkich rejsach, tak więc osoba musi dostać kontekst nazwy, a stan musi wzbogacić się o jego przechowywanie. Wszytko to musi być zapisane podczas kończenia poszczególnych sesji.
-- Dodajmy łączenie pojazdu z właścicielem który też płynie danym promem, i ograniczenie unimożliwiające dodanie auta bez właściciela.
-- Niech każdy rejs będzie powiązany z promem. Promy mają jednostki miejsca. Każdy prom może przewieźć 1000 jednostek, człowiek zabiera 5/10 jednostek, pojazdy 15/30/50 a towar 5 za m3, wprowadźmy możliwość sprawdzenia ile promowi zostało miejsca, oraz walidację przy sprzedaży kolejnego biletu, czy na promie będzie miejsce biorąc pod uwagę dotychczasowe sprzedane bilety.  
+#### Wydrukowanie rachunku
+Nasz biznes stwierdził, że warto dać możliwość wydruku rachunku naszym użytkownikom. Tak więc potrzebujemy kolejnego punktu w menu oraz ekranu na którym wyświetlimy wszystkie zdobyte do tej pory informacje. Czyli ile jakich biletów, jaki statek/rejs, jakie zniżki do jakich biletów zostały zastosowane.
 ### Pomoce
+####Rady ogólne
 
+- Pamiętajcie o obiektowości, enkapsulując domenowo spójną logikę w jednym obiekcie, możememy nie dość że go dobrze przetestować, napisać metody pomocnicze w stylu toString czy equals, to jeszcze dobrze panować nad kodem. A co najważniejsze, takie rozwiązania przeważnie są zwyczajnie - ładne :).
 ####Wzorce projektowe do wykorzystania:
 1. Singleton:
 

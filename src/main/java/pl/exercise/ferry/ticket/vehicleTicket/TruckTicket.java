@@ -1,5 +1,6 @@
-package pl.exercise.ferry.ticket;
+package pl.exercise.ferry.ticket.vehicleTicket;
 
+import pl.exercise.ferry.ticket.vehicleTicket.VehicleTicket;
 import pl.exercise.ferry.vehicle.VehicleType;
 
 import java.math.BigDecimal;

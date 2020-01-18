@@ -1,10 +1,15 @@
 package pl.exercise.ferry.screen;
 
 import pl.exercise.ferry.Basket;
+import pl.exercise.ferry.Singleton;
 import pl.exercise.ferry.ticket.*;
 import pl.exercise.ferry.ticket.personTicket.AdultTicket;
 import pl.exercise.ferry.ticket.personTicket.SeniorTicket;
 import pl.exercise.ferry.ticket.personTicket.YoungTicket;
+import pl.exercise.ferry.ticket.vehicleTicket.BikeTicket;
+import pl.exercise.ferry.ticket.vehicleTicket.BusTicket;
+import pl.exercise.ferry.ticket.vehicleTicket.CarTicket;
+import pl.exercise.ferry.ticket.vehicleTicket.TruckTicket;
 
 import java.util.Scanner;
 
@@ -19,7 +24,7 @@ public class TicketScreen {
         boolean repaetBuying = true;
 
         while (repaetBuying) {
-            System.out.println("Wybierz bilet , który chcesz kupić");
+            System.out.println("Wybierz bilet, który chcesz kupić:");
             System.out.println("1. Osoba");
             System.out.println("2. Pojazd");
             String secondResponse = scanner.nextLine();
@@ -34,38 +39,36 @@ public class TicketScreen {
                 String answer = scanner.nextLine();
                 if (answer.equalsIgnoreCase("tak")) repaetBuying = true;
                 if (answer.equalsIgnoreCase("nie")) repaetBuying = false;
+                Singleton.INSTANCE.addBalance(ticket.getPrice());
+                System.out.println("Kwota transakcji to: " + Singleton.INSTANCE.getBalance() + " zł.");
 
             }
             if ("2".equals(secondResponse)) {
-                System.out.println("Kupiłeś bilet dla pojazdu. Jaki to będzie pojazd? <CAR, BUS, BIKE, TRUCK>");
+                System.out.println("Kupiłeś bilet dla pojazdu. Jaki to będzie pojazd? <CAR, BIKE, BUS, TRUCK>");
                 String vehicle = scanner.nextLine();
                 System.out.println("Podaj swoje imie i nazwisko");
                 String owner = scanner.nextLine();
                 Ticket ticket = parseVehicle(vehicle.toUpperCase(), owner);
-                System.out.println("Za bilet zapłacisz: " + ticket.getPrice() + " zł.");
-                basket.addToPrice(ticket.getPrice());
-                basket.addToBasket(ticket);
+                System.out.println("Za bilet zapłacisz: " + ticket.getPrice() + " zł. Czy chcesz kupić kolejny bilet?");
+                String answer = scanner.nextLine();
+                if (answer.equalsIgnoreCase("tak")) repaetBuying = true;
+                if (answer.equalsIgnoreCase("nie")) repaetBuying = false;
+                //basket.addToPrice(ticket.getPrice());
+                //basket.addToBasket(ticket);
+                Singleton.INSTANCE.addBalance(ticket.getPrice());
+                System.out.println("Kwota transakcji to: " + Singleton.INSTANCE.getBalance() + " zł.");
             }
             if ("3".equals(secondResponse))
                 System.out.println("Kupiłeś bilet na ładunek");
 
-            System.out.println("Co chcesz dalej zrobić? <Nowy bilet> <Pokaż stan> <End>");
+            /*System.out.println("Co chcesz dalej zrobić? <Nowy bilet> <Pokaż stan> <End>");
             scanner.nextLine();
             String answer = scanner.nextLine();
             if (answer.equalsIgnoreCase("Nowy bilet")) repaetBuying = true;
             if (answer.equalsIgnoreCase("End")) repaetBuying = false;
-            if (answer.equalsIgnoreCase("Pokaż stan")) System.out.println(basket.getBalance());
+            if (answer.equalsIgnoreCase("Pokaż stan")) System.out.println(basket.getBalance());*/
         }
     }
-
-   /* private BigDecimal personPrice(int age) {
-        if (age < 0) throw new IllegalArgumentException("Podałeś wiek poniżej zera.");
-        if (age <= 3) return new PersonTicket(BigDecimal.valueOf(0)).getPrice();
-        if (age > 3 && age < 18) return new PersonTicket(BigDecimal.valueOf(5)).getPrice();
-        if (age > 18 && age < 70) return new PersonTicket(BigDecimal.valueOf(10)).getPrice();
-        else return new PersonTicket(BigDecimal.valueOf(5)).getPrice();
-    }*/
-
 
     private Ticket parseVehicle(String vehicle, String owner) {
         switch (vehicle) {
@@ -89,11 +92,10 @@ public class TicketScreen {
     }
 
     public Ticket paxType(int age, String owner) {
-        if (age < 0) throw new IllegalArgumentException("Podałeś wiek poniżej zera.");
         if (age > 0 && age <= 3) return new CarTicket(owner);
         if (age > 3 && age < 18) return new YoungTicket(owner);
         if (age > 18 && age < 70) return new AdultTicket(owner);
         if (age >= 70) return new SeniorTicket(owner);
-        else return null;
+        else throw new IllegalArgumentException("Podałeś błędny wiek");
     }
 }

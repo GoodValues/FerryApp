@@ -1,4 +1,4 @@
-package pl.exercise.ferry.ticket;
+package pl.exercise.ferry.ticket.vehicleTicket;
 
 import pl.exercise.ferry.vehicle.VehicleType;
 

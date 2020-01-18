@@ -1,0 +1,20 @@
+package pl.exercise.ferry.ticket;
+
+import pl.exercise.ferry.vehicle.VehicleType;
+
+import java.math.BigDecimal;
+
+public class TruckTicket extends VehicleTicket {
+
+    private float weight;
+
+    public TruckTicket(float weight, String owner) {
+        super(VehicleType.TRUCK, owner);
+        this.weight=weight;
+    }
+
+    @Override
+    public BigDecimal getPrice() {
+        return BigDecimal.valueOf(10).multiply(BigDecimal.valueOf(weight));
+    }
+}

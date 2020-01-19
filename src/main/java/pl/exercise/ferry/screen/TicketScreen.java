@@ -16,7 +16,7 @@ import java.util.Scanner;
 public class TicketScreen {
 
     private final Scanner scanner = new Scanner(System.in);
-    Basket basket = new Basket();
+    //Basket basket = new Basket();
 
 
     public void interact() {
@@ -29,34 +29,27 @@ public class TicketScreen {
             System.out.println("2. Pojazd");
             String secondResponse = scanner.nextLine();
             if ("1".equals(secondResponse)) {
-                System.out.println("Kupiłeś bilet dla człowieka. Wpisz jego wiek:");
+                System.out.println("Kupujesz bilet osobowy. Podaj wiek podróżnego:");
                 int age = scanner.nextInt();
-                System.out.println("Podaj swoje imie i nazwisko");
+                System.out.println("Podaj swoje imię i nazwisko");
                 String owner = scanner.nextLine();
                 Ticket ticket = paxType(age, owner);
                 scanner.nextLine();
-                System.out.println("Za bilet zapłacisz: " + ticket.getPrice() + " zł. Czy chcesz kupić kolejny bilet?");
-                String answer = scanner.nextLine();
-                if (answer.equalsIgnoreCase("tak")) repaetBuying = true;
-                if (answer.equalsIgnoreCase("nie")) repaetBuying = false;
+                System.out.println("Za bilet zapłacisz: " + ticket.getPrice() + " zł.");
+                new RepeatBuying().repeatBuying();
                 Singleton.INSTANCE.addBalance(ticket.getPrice());
-                System.out.println("Kwota transakcji to: " + Singleton.INSTANCE.getBalance() + " zł.");
 
             }
             if ("2".equals(secondResponse)) {
-                System.out.println("Kupiłeś bilet dla pojazdu. Jaki to będzie pojazd? <CAR, BIKE, BUS, TRUCK>");
+                System.out.println("Kupujesz bilet dla pojazdu. Jaki to będzie pojazd? <CAR, BIKE, BUS, TRUCK>");
                 String vehicle = scanner.nextLine();
-                System.out.println("Podaj swoje imie i nazwisko");
+                System.out.println("Podaj swoje imię i nazwisko");
                 String owner = scanner.nextLine();
                 Ticket ticket = parseVehicle(vehicle.toUpperCase(), owner);
-                System.out.println("Za bilet zapłacisz: " + ticket.getPrice() + " zł. Czy chcesz kupić kolejny bilet?");
-                String answer = scanner.nextLine();
-                if (answer.equalsIgnoreCase("tak")) repaetBuying = true;
-                if (answer.equalsIgnoreCase("nie")) repaetBuying = false;
-                //basket.addToPrice(ticket.getPrice());
-                //basket.addToBasket(ticket);
+                System.out.println("Za bilet zapłacisz: " + ticket.getPrice() + " zł.");
+                new RepeatBuying().repeatBuying();
                 Singleton.INSTANCE.addBalance(ticket.getPrice());
-                System.out.println("Kwota transakcji to: " + Singleton.INSTANCE.getBalance() + " zł.");
+
             }
             if ("3".equals(secondResponse))
                 System.out.println("Kupiłeś bilet na ładunek");
@@ -68,6 +61,8 @@ public class TicketScreen {
             if (answer.equalsIgnoreCase("End")) repaetBuying = false;
             if (answer.equalsIgnoreCase("Pokaż stan")) System.out.println(basket.getBalance());*/
         }
+        System.out.println("Kupiłeś bilet typu: " + " dla " + ".");
+        System.out.println("Kwota transakcji to: " + Singleton.INSTANCE.getBalance() + " zł.");
     }
 
     private Ticket parseVehicle(String vehicle, String owner) {
@@ -77,16 +72,17 @@ public class TicketScreen {
             case "BIKE":
                 return new BikeTicket(owner);
             case "BUS":
-                System.out.println("Podaj długość autobusu: ");
+                System.out.println("Podaj długość autobusu (w metrach): ");
                 float length = scanner.nextFloat();
-                System.out.println(length);
+                scanner.nextLine();
                 return new BusTicket(length, owner);
             case "TRUCK":
-                System.out.println("Podaj wagę ciężarówki");
+                System.out.println("Podaj wagę ciężarówki (w tonach):");
                 float weight = scanner.nextFloat();
+                scanner.nextLine();
                 return new TruckTicket(weight, owner);
             default:
-                System.out.println("Podałeś zły typ pojazdu");
+                System.out.println("Podałeś zły typ pojazdu.");
                 return null;
         }
     }
@@ -96,6 +92,6 @@ public class TicketScreen {
         if (age > 3 && age < 18) return new YoungTicket(owner);
         if (age > 18 && age < 70) return new AdultTicket(owner);
         if (age >= 70) return new SeniorTicket(owner);
-        else throw new IllegalArgumentException("Podałeś błędny wiek");
+        else throw new IllegalArgumentException("Podałeś błędny wiek.");
     }
 }

@@ -6,6 +6,8 @@ public class Singleton {
 
     public static final Singleton INSTANCE = new Singleton();
     private BigDecimal balance = BigDecimal.valueOf(0);
+    private String ticketType;
+    private String ticketSubtype;
 
     private Singleton() {
     }
@@ -18,3 +20,4 @@ public class Singleton {
         return balance;
     }
 }
+

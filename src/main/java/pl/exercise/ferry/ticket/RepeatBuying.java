@@ -17,8 +17,9 @@ public class RepeatBuying {
         if (answer.equalsIgnoreCase("nie")) {
             repaetBuying = false;
             System.out.println("Dziękujemy za zakupy.");
+            System.out.println("saldo: " + Singleton.INSTANCE.getBalance());
             System.out.println();
-            new MainScreen().interact();
+            //new MainScreen().interact();
         }
     }
 }

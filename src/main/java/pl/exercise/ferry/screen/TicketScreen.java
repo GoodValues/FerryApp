@@ -4,6 +4,7 @@ import pl.exercise.ferry.Basket;
 import pl.exercise.ferry.Singleton;
 import pl.exercise.ferry.ticket.*;
 import pl.exercise.ferry.ticket.personTicket.AdultTicket;
+import pl.exercise.ferry.ticket.personTicket.ChildTicket;
 import pl.exercise.ferry.ticket.personTicket.SeniorTicket;
 import pl.exercise.ferry.ticket.personTicket.YoungTicket;
 import pl.exercise.ferry.ticket.vehicleTicket.BikeTicket;
@@ -36,9 +37,8 @@ public class TicketScreen {
                 Ticket ticket = paxType(age, owner);
                 scanner.nextLine();
                 System.out.println("Za bilet zapłacisz: " + ticket.getPrice() + " zł.");
-                new RepeatBuying().repeatBuying();
                 Singleton.INSTANCE.addBalance(ticket.getPrice());
-
+                new RepeatBuying().repeatBuying();
             }
             if ("2".equals(secondResponse)) {
                 System.out.println("Kupujesz bilet dla pojazdu. Jaki to będzie pojazd? <CAR, BIKE, BUS, TRUCK>");
@@ -47,8 +47,8 @@ public class TicketScreen {
                 String owner = scanner.nextLine();
                 Ticket ticket = parseVehicle(vehicle.toUpperCase(), owner);
                 System.out.println("Za bilet zapłacisz: " + ticket.getPrice() + " zł.");
-                new RepeatBuying().repeatBuying();
                 Singleton.INSTANCE.addBalance(ticket.getPrice());
+                new RepeatBuying().repeatBuying();
 
             }
             if ("3".equals(secondResponse))
@@ -88,7 +88,7 @@ public class TicketScreen {
     }
 
     public Ticket paxType(int age, String owner) {
-        if (age > 0 && age <= 3) return new CarTicket(owner);
+        if (age > 0 && age <= 3) return new ChildTicket(owner);
         if (age > 3 && age < 18) return new YoungTicket(owner);
         if (age > 18 && age < 70) return new AdultTicket(owner);
         if (age >= 70) return new SeniorTicket(owner);

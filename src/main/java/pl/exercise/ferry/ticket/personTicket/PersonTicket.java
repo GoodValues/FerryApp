@@ -20,6 +20,8 @@ public abstract class PersonTicket implements Ticket {
         this.owner = owner;
     }
 
-
-
+    @Override
+    public String getType() {
+        return "Person";
+    }
 }

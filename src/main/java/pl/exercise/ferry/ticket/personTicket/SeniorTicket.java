@@ -15,4 +15,9 @@ public class SeniorTicket extends PersonTicket {
     public BigDecimal getPrice() {
         return BigDecimal.valueOf(5);
     }
+
+    @Override
+    public String getSubType() {
+        return "Senior";
+    }
 }

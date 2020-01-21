@@ -1,7 +1,6 @@
 package pl.exercise.ferry.screen;
 
 import pl.exercise.ferry.Basket;
-import pl.exercise.ferry.Singleton;
 import pl.exercise.ferry.ticket.*;
 import pl.exercise.ferry.ticket.personTicket.AdultTicket;
 import pl.exercise.ferry.ticket.personTicket.ChildTicket;
@@ -12,6 +11,7 @@ import pl.exercise.ferry.ticket.vehicleTicket.BusTicket;
 import pl.exercise.ferry.ticket.vehicleTicket.CarTicket;
 import pl.exercise.ferry.ticket.vehicleTicket.TruckTicket;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class TicketScreen {
@@ -19,8 +19,7 @@ public class TicketScreen {
     private final Scanner scanner = new Scanner(System.in);
     //Basket basket = new Basket();
 
-
-    public void interact() {
+    public void interact() throws IOException {
 
         boolean repaetBuying = true;
 
@@ -34,10 +33,11 @@ public class TicketScreen {
                 int age = scanner.nextInt();
                 System.out.println("Podaj swoje imię i nazwisko");
                 String owner = scanner.nextLine();
-                Ticket ticket = paxType(age, owner);
+                Ticket ticket = parsePerson(age, owner);
                 scanner.nextLine();
                 System.out.println("Za bilet zapłacisz: " + ticket.getPrice() + " zł.");
-                Singleton.INSTANCE.addBalance(ticket.getPrice());
+                Basket.INSTANCE.addBalance(ticket.getPrice());
+                Basket.INSTANCE.addNewTicket(ticket);
                 new RepeatBuying().repeatBuying();
             }
             if ("2".equals(secondResponse)) {
@@ -47,7 +47,8 @@ public class TicketScreen {
                 String owner = scanner.nextLine();
                 Ticket ticket = parseVehicle(vehicle.toUpperCase(), owner);
                 System.out.println("Za bilet zapłacisz: " + ticket.getPrice() + " zł.");
-                Singleton.INSTANCE.addBalance(ticket.getPrice());
+                Basket.INSTANCE.addBalance(ticket.getPrice());
+                Basket.INSTANCE.addNewTicket(ticket);
                 new RepeatBuying().repeatBuying();
 
             }
@@ -62,7 +63,7 @@ public class TicketScreen {
             if (answer.equalsIgnoreCase("Pokaż stan")) System.out.println(basket.getBalance());*/
         }
         System.out.println("Kupiłeś bilet typu: " + " dla " + ".");
-        System.out.println("Kwota transakcji to: " + Singleton.INSTANCE.getBalance() + " zł.");
+        System.out.println("Kwota transakcji to: " + Basket.INSTANCE.getBalance() + " zł.");
     }
 
     private Ticket parseVehicle(String vehicle, String owner) {
@@ -87,7 +88,7 @@ public class TicketScreen {
         }
     }
 
-    public Ticket paxType(int age, String owner) {
+    public Ticket parsePerson(int age, String owner) {
         if (age > 0 && age <= 3) return new ChildTicket(owner);
         if (age > 3 && age < 18) return new YoungTicket(owner);
         if (age > 18 && age < 70) return new AdultTicket(owner);

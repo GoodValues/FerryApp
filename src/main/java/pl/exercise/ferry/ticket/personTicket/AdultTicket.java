@@ -14,4 +14,9 @@ public class AdultTicket extends PersonTicket {
     public BigDecimal getPrice() {
         return BigDecimal.valueOf(10);
     }
+
+    @Override
+    public String getSubType() {
+        return "Adult";
+    }
 }

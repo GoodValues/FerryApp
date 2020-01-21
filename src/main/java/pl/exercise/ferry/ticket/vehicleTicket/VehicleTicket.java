@@ -15,4 +15,11 @@ public abstract class VehicleTicket implements Ticket {
     this.owner = owner;
   }
 
+  @Override
+  public String getType() {
+    return "Vehicle";
+  }
+
+
+
 }

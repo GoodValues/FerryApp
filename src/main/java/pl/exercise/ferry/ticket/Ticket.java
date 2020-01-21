@@ -5,6 +5,11 @@ import java.math.BigDecimal;
 public interface Ticket {
 
   BigDecimal getPrice();
+  String getType();
+  String getSubType();
+
+
+
 
 
 }

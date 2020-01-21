@@ -8,24 +8,35 @@ import java.util.List;
 
 public class Basket {
 
-    List<Ticket> tickets;
-    BigDecimal balance = BigDecimal.ZERO;
-    Ticket ticket;
+    public static final Basket INSTANCE = new Basket();
+    private BigDecimal balance = BigDecimal.ZERO;
+    private List<Ticket> tickets = new ArrayList<>();
+    private String ticketType;
+    private String ticketSubtype;
 
-    public Basket() {
-        this.tickets = new ArrayList<>();
+    private Basket() {
     }
 
-    public void addToPrice(BigDecimal price) {
-        this.balance=balance.add(price);
-    }
-
-    public void addToBasket (Ticket ticket) {
-        tickets.add(ticket);
+    public void addBalance(BigDecimal price){
+        this.balance = balance.add(price);
     }
 
     public BigDecimal getBalance() {
         return balance;
     }
 
+    public void addNewTicket (Ticket ticket) {
+        tickets.add(ticket);
+    }
+
+    public List listOfTickets() {
+        return tickets;
+    }
+
+
+
+
+
+
 }
+

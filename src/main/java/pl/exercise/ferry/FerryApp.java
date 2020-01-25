@@ -1,10 +1,8 @@
 package pl.exercise.ferry;
 
 import pl.exercise.ferry.screen.MainScreen;
-import pl.exercise.ferry.ticket.Ticket;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 
 public class FerryApp {
 
@@ -13,3 +11,4 @@ public class FerryApp {
     mainScreen.interact();
   }
 }
+

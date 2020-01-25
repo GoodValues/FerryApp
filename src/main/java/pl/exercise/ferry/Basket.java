@@ -1,5 +1,7 @@
 package pl.exercise.ferry;
 
+import pl.exercise.ferry.prom.Prom;
+import pl.exercise.ferry.prom.PromNames;
 import pl.exercise.ferry.ticket.Ticket;
 
 import java.math.BigDecimal;
@@ -10,9 +12,9 @@ public class Basket {
 
     public static final Basket INSTANCE = new Basket();
     private BigDecimal balance = BigDecimal.ZERO;
-    private List<Ticket> tickets = new ArrayList<>();
-    private String ticketType;
-    private String ticketSubtype;
+    private Prom prom = new Prom(PromNames.JAGIENKA);
+//    private List<Ticket> tickets = new ArrayList<>();
+
 
     private Basket() {
     }
@@ -25,12 +27,17 @@ public class Basket {
         return balance;
     }
 
+    public void setBalance(BigDecimal balance) {
+        this.balance=balance;
+    }
+
+
     public void addNewTicket (Ticket ticket) {
-        tickets.add(ticket);
+        prom.getListOfTickets().add(ticket);
     }
 
     public List listOfTickets() {
-        return tickets;
+        return prom.getListOfTickets();
     }
 
 

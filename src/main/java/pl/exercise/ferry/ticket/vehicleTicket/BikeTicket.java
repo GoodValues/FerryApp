@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 
 public class BikeTicket extends VehicleTicket {
 
+    public final float unitQuantity = 15;
+
     public BikeTicket(String owner) {
         super(VehicleType.BIKE, owner);
     }
@@ -20,5 +22,9 @@ public class BikeTicket extends VehicleTicket {
         return "Bike";
     }
 
+    @Override
+    public float getUnitQuantity() {
+        return unitQuantity;
+    }
 
 }

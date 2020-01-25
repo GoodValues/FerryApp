@@ -1,10 +1,10 @@
 package pl.exercise.ferry.ticket.personTicket;
 
-import pl.exercise.ferry.pax.PaxType;
-
 import java.math.BigDecimal;
 
 public class AdultTicket extends PersonTicket {
+
+    public final float unitQuantity = 10;
 
     public AdultTicket(String owner) {
         super(PaxType.ADULT, owner);
@@ -19,4 +19,10 @@ public class AdultTicket extends PersonTicket {
     public String getSubType() {
         return "Adult";
     }
+
+    @Override
+    public float getUnitQuantity() {
+        return unitQuantity;
+    }
+
 }

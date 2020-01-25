@@ -1,28 +1,24 @@
-package pl.exercise.ferry.ticket.personTicket;
+package pl.exercise.ferry.ticket.cargoTicket;
 
+import javafx.util.converter.BigDecimalStringConverter;
 import pl.exercise.ferry.ticket.Ticket;
 
 import java.math.BigDecimal;
-import java.util.Scanner;
 
-public abstract class PersonTicket implements Ticket {
+public abstract class CargoTicket implements Ticket {
 
-    Scanner scanner = new Scanner(System.in);
-
-
-    private PaxType paxType;
+    private final CargoType cargoType;
     private String owner;
-    private String personType;
     private BigDecimal price;
 
-    public PersonTicket(PaxType paxType, String owner) {
-        this.paxType = paxType;
+    public CargoTicket(CargoType cargoType, String owner) {
+        this.cargoType = cargoType;
         this.owner = owner;
     }
 
     @Override
     public String getType() {
-        return "Person";
+        return "Cargo";
     }
 
     @Override

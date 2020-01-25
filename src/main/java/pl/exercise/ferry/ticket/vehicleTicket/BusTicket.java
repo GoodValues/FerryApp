@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 public class BusTicket extends VehicleTicket {
 
     private float length;
+    public final float unitQuantity = 50;
 
     public BusTicket(float length, String owner) {
         super(VehicleType.BUS, owner);
@@ -21,6 +22,11 @@ public class BusTicket extends VehicleTicket {
     @Override
     public String getSubType() {
         return "Bus";
+    }
+
+    @Override
+    public float getUnitQuantity() {
+        return unitQuantity;
     }
 
 
